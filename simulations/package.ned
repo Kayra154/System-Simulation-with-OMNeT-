@@ -13,25 +13,15 @@ import inet.queueing.queue.PacketQueue;
 import inet.queueing.classifier.PriorityClassifier;
 import inet.queueing.source.ActivePacketSource;
 
-//simple Queue
-//{
-//    parameters:
-//        double emergencyProbability = default(0.3);
-//        volatile double meanServiceTime @unit(s) = default(0.05s);
-//        @display("i=block/queue");
-//    gates:
-//        inout ethgIn @labels(EtherFrame);
-//        inout ethgOut @labels(EtherFrame);
-//}
 @license(LGPL);
 network LoRaNetworkTest
 {
     submodules:
         loRaNode: LoRaNode {
-            @display("p=320.565,410.865");
+            @display("p=287,373");
         }
         loRaGateway: LoRaGW {
-            @display("p=276,325;is=s");
+            @display("p=262,320;is=s");
         }
         LoRaMedium: LoRaMedium {
             @display("p=833,64");
@@ -48,12 +38,7 @@ network LoRaNetworkTest
         gwRouter: Router {
             @display("p=135,287");
         }
-//        myQueue: Queue {
-//            @display("p=248,238");   // Position between router and server
-//        }
     connections:
         gwRouter.ethg++ <--> Eth1G <--> loRaGateway.ethg++;
-//        gwRouter.ethg++ <--> Eth1G <--> myQueue.ethgIn;
-//        myQueue.ethgOut <--> Eth1G <--> HospitalServer.ethg++;
-		gwRouter.ethg++ <--> Eth1G <--> HospitalServer.ethg++;
+        gwRouter.ethg++ <--> Eth1G <--> HospitalServer.ethg++;
 }

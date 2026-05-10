@@ -15,11 +15,9 @@
 
 package test2;
 
-import flora.LoRa.NetworkServerApp;
+import flora.LoRaApp.SimpleLoRaApp;
 
-simple HospitalServerApp extends NetworkServerApp{
-    int queueSize = default(50);
-    int urgentQueue = default(0);
-    int normalQueue = default(0);
-    double expo_rate_lambda= default(1);
+simple PatientSensorApp extends SimpleLoRaApp{
+    double uniform_rate_IAT= default(1);
+    double expo_rate_lambda= default(3);
 }

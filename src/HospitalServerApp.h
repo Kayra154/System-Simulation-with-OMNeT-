@@ -11,11 +11,29 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-//
+// 
 
-import flora
+#ifndef HOSPITALSERVERAPP_H_
+#define HOSPITALSERVERAPP_H_
 
-packet CustomPacket {
-    string payload = "patient_name:Toprak_Şen_situation:he_is_having_an_heart_attack_or_somethin";
-    bool = false;
-}
+#include "LoRa/NetworkServerApp.h"
+
+class HospitalServerApp final : public flora::NetworkServerApp {
+private:
+    double expo_rate_lambda;
+    uint8_t queueSize;
+    uint8_t urgentQueueCount;
+    uint8_t normalQueueCount;
+    uint16_t urgentDroppedCounter;
+    uint16_t normalDroppedCounter;
+
+public:
+    HospitalServerApp();
+    virtual ~HospitalServerApp();
+    HospitalServerApp(const HospitalServerApp &other);
+    void initialize(int);
+    virtual void handleMessage(cMessage *msg) override;
+    void scheduleNextService();
+};
+
+#endif /* HOSPITALSERVERAPP_H_ */

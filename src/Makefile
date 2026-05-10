@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for test2
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -KFLORA_PROJ=../../flora -KINET4_4_PROJ=../../inet4.4 -DINET_IMPORT -L$$\(FLORA_PROJ\)/src -L$$\(INET4_4_PROJ\)/src -lflora$$\(D\) -lINET$$\(D\)
+#  opp_makemake -f --deep -KFLORA_PROJ=../../flora -KINET4_4_PROJ=../../inet4.4 -DINET_IMPORT -I$$\(FLORA_PROJ\)/src -I$$\(INET4_4_PROJ\)/src -L$$\(FLORA_PROJ\)/src -L$$\(INET4_4_PROJ\)/src -lflora$$\(D\) -lINET$$\(D\)
 #
 
 # Name of target to be created (-o option)
@@ -19,7 +19,7 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(QTENV_LIBS) $(CMDENV_LIBS)
 #USERIF_LIBS = $(QTENV_LIBS)
 
 # C++ include paths (with -I)
-INCLUDE_PATH =
+INCLUDE_PATH = -I$(FLORA_PROJ)/src -I$(INET4_4_PROJ)/src
 
 # Additional object and library files to link with
 EXTRA_OBJS =
@@ -33,7 +33,7 @@ PROJECTRELATIVE_PATH = src
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
-OBJS =
+OBJS = $O/HospitalServerApp.o $O/PatientSensorApp.o
 
 # Message files
 MSGFILES =
