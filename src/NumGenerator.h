@@ -13,12 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package test2;
-
-import flora.LoRaApp.SimpleLoRaApp;
-
-simple PatientSensorApp extends SimpleLoRaApp{
-    double uniform_rate_IAT= default(1);
-    double expo_rate_lambda= default(3);
-    double emergencyThreshold = default(20);
-}
+#ifndef NUMGENERATOR_H_
+#define NUMGENERATOR_H_
+class NumGenerator {
+public:
+    NumGenerator();
+    virtual ~NumGenerator();
+    NumGenerator(const NumGenerator &other);
+    static double exponential(double lambda);
+};
+#endif /* NUMGENERATOR_H_ */

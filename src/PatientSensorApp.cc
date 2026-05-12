@@ -1,5 +1,5 @@
 #include "PatientSensorApp.h"
-
+#include "NumGenerator.h"
 Define_Module(PatientSensorApp);
 using namespace flora;
 
@@ -67,7 +67,27 @@ void PatientSensorApp::sendJoinRequest()
     // Encode: msgType = DATA, sampleMeasurement encodes urgency + patient id
     // Convention: sampleMeasurement > 0 = urgent, 0 = normal
     payload->setMsgType(DATA);
-    payload->setSampleMeasurement(1);  // 1 = urgent (heart attack), 0 = normal
+
+    //değişen kısım burası
+    //payload->setSampleMeasurement(1);  // 1 = urgent (heart attack), 0 = normal
+    // 3 olması lazım
+    double lambda = par("expo_rate_lambda").doubleValue();
+    // 20 ayarladım
+    double threshold = par("emergencyThreshold").doubleValue();
+
+//   //rastgele expo_variate
+    double variate = NumGenerator::exponential(lambda);
+
+    // tresholddan küçükse acil değilse normal
+    //urgent olup olmadığı burad belrlienecek
+    bool isEmergency = (variate < threshold);
+
+    //logic de bu
+    payload->setSampleMeasurement(isEmergency ? 1 : 0);
+    //test/debug
+    EV << "variate=" << variate << ", threshold=" << threshold
+       << " => " << (isEmergency ? "URGENT" : "normal") << endl;
+
 
     auto loraTag = pktRequest->addTagIfAbsent<LoRaTag>();
     loraTag->setBandwidth(getBW());

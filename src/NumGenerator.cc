@@ -13,12 +13,26 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package test2;
+#include "NumGenerator.h"
+#include <cmath>
+#include <cstdlib>
 
-import flora.LoRaApp.SimpleLoRaApp;
+using namespace std;
+NumGenerator::NumGenerator() {
+    // TODO Auto-generated constructor stub
 
-simple PatientSensorApp extends SimpleLoRaApp{
-    double uniform_rate_IAT= default(1);
-    double expo_rate_lambda= default(3);
-    double emergencyThreshold = default(20);
 }
+
+NumGenerator::~NumGenerator() {
+    // TODO Auto-generated destructor stub
+}
+
+NumGenerator::NumGenerator(const NumGenerator &other) {
+    // TODO Auto-generated constructor stub
+
+}
+double NumGenerator::exponential(double lambda){
+    double u = (double)rand()/(RAND_MAX+1);
+    return -log(1-u)/lambda;
+}
+
